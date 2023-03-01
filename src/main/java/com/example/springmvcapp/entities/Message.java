@@ -33,7 +33,7 @@ public class Message {
     public Message(String text, String tag) {
         this.text = text;
         this.tag = tag;
-       // this.author = author;
+        // this.author = author;
     }
 
     public Message() {

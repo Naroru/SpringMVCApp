@@ -1,12 +1,15 @@
+
 package com.example.springmvcapp.entities;
 
-import org.springframework.security.core.GrantedAuthority;
 
-public enum Roles implements GrantedAuthority {
+/*public enum Roles implements GrantedAuthority {*/
+
+public enum Roles  {
     USER;
 
-    @Override
+   /* @Override
     public String getAuthority() {
         return name();
-    }
+    }*/
 }
+

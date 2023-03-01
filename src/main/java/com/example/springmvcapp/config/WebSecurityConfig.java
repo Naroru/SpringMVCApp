@@ -1,7 +1,7 @@
 
 package com.example.springmvcapp.config;
 
-import com.example.springmvcapp.service.UserService;
+/*import com.example.springmvcapp.service.UserService;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +27,9 @@ public class WebSecurityConfig  {
 
     @Autowired
     private DataSource dataSource;
-
+/*
     @Autowired
-    private UserService userService;
+    private UserService userService;*/
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -49,19 +49,21 @@ public class WebSecurityConfig  {
         return http.build();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, UserService personDetailsService) throws Exception {
+   @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService personDetailsService) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(personDetailsService)
                 .and()
                 .build();
     }
+
     @Bean
     public UserDetailsService userDetailsService() {
+
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("a")
-                        .password("a")
+                        .username("user")
+                        .password("password")
                         .roles("USER")
                         .build();
 
@@ -69,10 +71,12 @@ public class WebSecurityConfig  {
     }
 
 
-   /* @Bean
+/* @Bean
     public UserDetailsService userDetailsService() {
 
 *//*
+*/
+/*
        UserDetails user =   User.withDefaultPasswordEncoder()
                 .username("a")
                 .password("a")
@@ -83,6 +87,8 @@ public class WebSecurityConfig  {
        jdbcUserDetailsManager.createUser(user);
 
        return jdbcUserDetailsManager;*//*
+*/
+/*
 
 
 
@@ -94,4 +100,7 @@ public class WebSecurityConfig  {
        // return userService;
 
     }*/
+
+
 }
+

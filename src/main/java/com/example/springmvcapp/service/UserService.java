@@ -1,3 +1,4 @@
+/*
 package com.example.springmvcapp.service;
 
 import com.example.springmvcapp.entities.User;
@@ -21,3 +22,4 @@ public class UserService implements UserDetailsService {
         return new SecurityUser(user);
     }
 }
+*/
