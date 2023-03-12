@@ -1,4 +1,4 @@
-# SpringMVCApp
+# Spring MVC App
 Pet project of simple Spring MVC app
 
 ## About
