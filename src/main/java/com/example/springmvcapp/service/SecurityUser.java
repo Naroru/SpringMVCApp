@@ -1,4 +1,4 @@
-/*
+
 package com.example.springmvcapp.service;
 
 import com.example.springmvcapp.entities.User;
@@ -49,5 +49,7 @@ public class SecurityUser implements UserDetails {
     public boolean isEnabled() {
         return user.isActive();
     }
+
+
 }
-*/
+

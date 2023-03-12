@@ -1,4 +1,4 @@
-/*
+
 package com.example.springmvcapp.service;
 
 import com.example.springmvcapp.entities.User;
@@ -19,7 +19,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user =  userRep.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User was not find"));
-        return new SecurityUser(user);
+        return user;
     }
 }
-*/
+

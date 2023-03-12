@@ -4,7 +4,9 @@ import com.example.springmvcapp.entities.Message;
 import com.example.springmvcapp.entities.User;
 import com.example.springmvcapp.repositories.MessageRep;
 import com.example.springmvcapp.repositories.UserRep;
+import com.example.springmvcapp.service.SecurityUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,15 +43,19 @@ public class MainController {
             messages = messageRep.findByTag(filter);
 
         model.addAttribute("messages", messages);
-        model.addAttribute("filter", filter);
+        model.addAttribute("filter", "");
 
         return "main";
     }
 
     @PostMapping("/main")
-    public String addMessage(@RequestParam String text, @RequestParam String tag, Map<String, Object> model )
+    public String addMessage(@RequestParam String text,
+                             @RequestParam String tag,
+                             //получим пользователя из данных аутентификации
+                             @AuthenticationPrincipal User user,
+                             Map<String, Object> model )
     {
-        Message message = new Message(text,tag);
+        Message message = new Message(text,tag, user);
         messageRep.save(message);
 
         Iterable<Message> messages  = messageRep.findAll();

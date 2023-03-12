@@ -4,7 +4,8 @@
 <@common_macros.page>
 
 <#--    переменная, которая будет заполнена из модели (map в контроллере)-->
-    ${message}
-    <@loginForm.userForm "/registration" />
+<#--    Если сообщения нет, то будет ""-->
+    ${message! ""}
+    <@loginForm.login "/registration" />
 
 </@common_macros.page>

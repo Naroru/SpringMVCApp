@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -23,6 +25,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity //нужна для проверки прав ( пример в UserController)
 public class WebSecurityConfig  {
 
     @Autowired
@@ -30,6 +33,10 @@ public class WebSecurityConfig  {
 /*
     @Autowired
     private UserService userService;*/
+@Bean
+public PasswordEncoder passwordEncoder() {
+    return NoOpPasswordEncoder.getInstance();
+}
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -49,15 +56,8 @@ public class WebSecurityConfig  {
         return http.build();
     }
 
-   @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, UserDetailsService personDetailsService) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(personDetailsService)
-                .and()
-                .build();
-    }
 
-    @Bean
+ /*   @Bean
     public UserDetailsService userDetailsService() {
 
         UserDetails user =
@@ -69,7 +69,7 @@ public class WebSecurityConfig  {
 
         return new InMemoryUserDetailsManager(user);
     }
-
+*/
 
 /* @Bean
     public UserDetailsService userDetailsService() {

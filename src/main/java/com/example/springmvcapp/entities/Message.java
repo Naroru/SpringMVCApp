@@ -19,26 +19,28 @@ public class Message {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-/*
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
-*/
 
     private String text;
 
     private String tag;
 
-    public Message(String text, String tag) {
+    public Message(String text, String tag, User author) {
         this.text = text;
         this.tag = tag;
-        // this.author = author;
+        this.author = author;
     }
 
     public Message() {
     }
 
+    public String getAuthorName()
+    {
+       return author != null ? author.getUsername() : "<none>";
+    }
     public String getText() {
         return text;
     }
@@ -63,11 +65,11 @@ public class Message {
         this.id = id;
     }
 
-/*    public User getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
     public void setAuthor(User author) {
         this.author = author;
-    }*/
+    }
 }

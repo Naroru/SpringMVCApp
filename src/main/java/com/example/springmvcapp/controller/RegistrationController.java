@@ -6,6 +6,7 @@ import com.example.springmvcapp.entities.User;
 import com.example.springmvcapp.repositories.UserRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -22,11 +23,13 @@ public class RegistrationController {
 
 
     @GetMapping("/registration")
-    public String registration()
+    public String registration(Model model)
     {
+  //      model.addAttribute("message", "test");
         return "registration";
     }
 
+    //непонятно почему тут не  public String addUser(@ResponseBody User user, Map<String, Object> model) {
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
         boolean userExists = userRep.findByUsername(user.getUsername()).isPresent();
@@ -38,6 +41,7 @@ public class RegistrationController {
             user.setActive(true);
             user.setRoles(roles);
             userRep.save(user);
+
 
         } else {
             model.put("message", "user exist!");
